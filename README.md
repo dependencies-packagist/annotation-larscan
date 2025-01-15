@@ -16,6 +16,36 @@ You can install the package via [Composer](https://getcomposer.org/):
 composer require annotation/larscan
 ```
 
+## Usage
+
+```php
+use Annotation\Scannable\Annotations\Scan;
+use Annotation\Scannable\Annotations\ScanFile;
+use Annotation\Scannable\Annotations\ScanNamespace;
+use Annotation\Scannable\Annotations\ScanPath;
+use Annotation\Scannable\Annotations\ScanPackageNamespace;
+use Annotation\Scannable\Contracts\Scannable;
+
+#[ScanPackageNamespace(['GuzzleHttp'])]
+
+#[ScanNamespace(['Illuminate\Support\Arr'])]
+#[ScanNamespace(['Illuminate\Support*'])]
+
+#[ScanPath(__DIR__.'/../Http/')]
+#[ScanPath(new \RecursiveDirectoryIterator(__DIR__.'/../Http/Controllers'))]
+
+#[ScanFile(__FILE__)]
+#[ScanFile(new \SplFileInfo(__DIR__ . '/AppServiceProvider.php'))]
+
+#[Scan('Illuminate\Support\Arr')]
+#[Scan(['Illuminate\Support\Arr'])]
+#[Scan(new \ReflectionClass('Illuminate\Support\Arr'))]
+class AppServiceProvider extends ServiceProvider implements Scannable
+{
+    //
+}
+```
+
 ## License
 
 Nacosvel Contracts is made available under the MIT License (MIT). Please see [License File](LICENSE) for more information.
