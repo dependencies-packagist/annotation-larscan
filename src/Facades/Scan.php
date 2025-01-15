@@ -5,11 +5,12 @@ namespace Annotation\Scannable\Facades;
 use Annotation\Scannable\Contracts\Scanned;
 use Annotation\Scannable\Manager;
 use Closure;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static void scanning(Closure|string $abstract, mixed ...$payload)
- * @method static void using(string $abstract, Closure $callback)
+ * @method static Collection using(string $abstract, Closure $callback)
  *
  * @see Scanned
  * @see Manager

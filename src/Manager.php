@@ -5,6 +5,7 @@ namespace Annotation\Scannable;
 use Annotation\Scannable\Contracts\Scanned;
 use BadMethodCallException;
 use Closure;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
 
 class Manager implements Scanned
@@ -47,25 +48,33 @@ class Manager implements Scanned
     /**
      * @param string $abstract
      * @param Closure $callback
-     * @return void
+     * @return Collection
      */
-    public function using(string $abstract, Closure $callback): void
+    public function using(string $abstract, Closure $callback): Collection
     {
         $this->fireCallback($this->globalScanCallback);
-        $this->fireCallback(array_map(function ($payload) use ($callback) {
+        return $this->fireCallback(array_map(function ($payload) use ($callback) {
             return [$callback, $payload];
         }, $this->scanCallback[$abstract] ?? []));
     }
 
     /**
      * @param array $callbacks
-     * @return void
+     * @return Collection
      */
-    protected function fireCallback(array $callbacks): void
+    protected function fireCallback(array $callbacks): Collection
     {
+        $responses = [];
         foreach ($callbacks as [$callback, $arguments]) {
-            call_user_func_array($callback, $arguments);
+            $response = call_user_func_array($callback, $arguments);
+
+            if ($response === false) {
+                break;
+            }
+
+            $responses[] = $response;
         }
+        return collect($responses);
     }
 
     /**
