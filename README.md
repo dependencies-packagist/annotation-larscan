@@ -47,6 +47,9 @@ class AppServiceProvider extends ServiceProvider implements Scannable
 ```
 
 ```php
+use Annotation\Scannable\Contracts\Scanned;
+use Annotation\Scannable\Facades\Scan;
+
 public function scan(Scanned $scan): void
 {
     $scan->using(ScanNamespace::class, function (ScanNamespace $scanNamespace) {
