@@ -15,13 +15,6 @@ class Manager implements Scanned
     }
 
     /**
-     * All the global scan callbacks.
-     *
-     * @var array
-     */
-    protected array $globalScanCallback = [];
-
-    /**
      * All the scan callbacks.
      *
      * @var array<string,array>
@@ -29,20 +22,16 @@ class Manager implements Scanned
     protected array $scanCallback = [];
 
     /**
-     * @param Closure|string $abstract
+     * @param string $abstract
      * @param mixed ...$payload
      * @return void
      */
-    public function scanning(Closure|string $abstract, mixed ...$payload): void
+    public function scanning(string $abstract, mixed ...$payload): void
     {
-        if ($abstract instanceof Closure) {
-            $this->globalScanCallback[] = [$abstract, $payload];
-        } else {
-            if (!array_key_exists($abstract, $this->scanCallback)) {
-                $this->scanCallback[$abstract] = [];
-            }
-            $this->scanCallback[$abstract][] = $payload;
+        if (!array_key_exists($abstract, $this->scanCallback)) {
+            $this->scanCallback[$abstract] = [];
         }
+        $this->scanCallback[$abstract][] = $payload;
     }
 
     /**
@@ -52,7 +41,6 @@ class Manager implements Scanned
      */
     public function using(string $abstract, Closure $callback): Collection
     {
-        $this->fireCallback($this->globalScanCallback);
         return $this->fireCallback(array_map(function ($payload) use ($callback) {
             return [$callback, $payload];
         }, $this->scanCallback[$abstract] ?? []));

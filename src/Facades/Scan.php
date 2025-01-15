@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static void scanning(Closure|string $abstract, mixed ...$payload)
+ * @method static void scanning(string $abstract, mixed ...$payload)
  * @method static Collection using(string $abstract, Closure $callback)
  *
  * @see Scanned
