@@ -46,6 +46,18 @@ class AppServiceProvider extends ServiceProvider implements Scannable
 }
 ```
 
+```php
+public function scan(Scanned $scannable): void
+{
+    $scannable->using(ScanNamespace::class, function (ScanNamespace $scanNamespace) {
+        dump($scanNamespace->getReflectionClass());
+    });
+    Scan::using(ScanNamespace::class, function (ScanNamespace $scanNamespace) {
+        dump($scanNamespace->getReflectionClass());
+    });
+}
+```
+
 ## License
 
 Nacosvel Contracts is made available under the MIT License (MIT). Please see [License File](LICENSE) for more information.
