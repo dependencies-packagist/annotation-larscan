@@ -5,11 +5,14 @@ namespace Annotation\Scannable\Annotations;
 use Annotation\Scannable\Contracts\Scannable;
 use Attribute;
 use Composer\Autoload\ClassLoader;
+use Illuminate\Support\Traits\Macroable;
 use ReflectionClass;
 
 #[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
 class Scan implements Scannable
 {
+    use Macroable;
+
     protected ClassLoader $classLoader;
 
     public function __construct(

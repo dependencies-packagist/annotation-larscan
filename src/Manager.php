@@ -4,9 +4,12 @@ namespace Annotation\Scannable;
 
 use Annotation\Scannable\Contracts\Scanned;
 use Closure;
+use Illuminate\Support\Traits\Macroable;
 
 class Manager implements Scanned
 {
+    use Macroable;
+
     /**
      * All the global scan callbacks.
      *
