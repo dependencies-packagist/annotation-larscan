@@ -3,12 +3,15 @@
 namespace Annotation\Scannable;
 
 use Annotation\Scannable\Contracts\Scanned;
+use BadMethodCallException;
 use Closure;
 use Illuminate\Support\Traits\Macroable;
 
 class Manager implements Scanned
 {
-    use Macroable;
+    use Macroable {
+        __call as macroCall;
+    }
 
     /**
      * All the global scan callbacks.
@@ -63,6 +66,24 @@ class Manager implements Scanned
         foreach ($callbacks as [$callback, $arguments]) {
             call_user_func_array($callback, $arguments);
         }
+    }
+
+    /**
+     * Dynamically handle calls the instance.
+     *
+     * @param string $method
+     * @param array $parameters
+     * @return mixed
+     */
+    public function __call($method, $parameters)
+    {
+        if (static::hasMacro($method)) {
+            return $this->macroCall($method, $parameters);
+        }
+
+        throw new BadMethodCallException(sprintf(
+            'Method %s::%s does not exist.', static::class, $method
+        ));
     }
 
 }
