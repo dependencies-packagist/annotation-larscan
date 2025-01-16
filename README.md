@@ -18,12 +18,47 @@ composer require annotation/larscan
 
 ## Usage
 
+### Instantiation method
+
 ```php
-use Rfc\Scannable\Scan;
-use Rfc\Scannable\ScanFile;
-use Rfc\Scannable\ScanNamespace;
-use Rfc\Scannable\ScanPath;
-use Rfc\Scannable\ScanPackageNamespace;
+use Annotation\Scannable\Attributes\Scan;
+use Annotation\Scannable\Attributes\ScanFile;
+use Annotation\Scannable\Attributes\ScanNamespace;
+use Annotation\Scannable\Attributes\ScanPath;
+use Annotation\Scannable\Attributes\ScanPackageNamespace;
+
+public function scan(): void
+{
+    // ScanPackageNamespace
+    $scan = new ScanPackageNamespace(['GuzzleHttp']);
+    
+    // ScanNamespace
+    $scan = new ScanNamespace(['Illuminate\Support\Arr']);
+    $scan = new ScanNamespace(['Illuminate\Support*']);
+    
+    // ScanPath
+    $scan = new ScanPath(__DIR__.'/../Http/');
+    $scan = new ScanPath(new \RecursiveDirectoryIterator(__DIR__.'/../Http/Controllers'));
+    
+    // ScanFile
+    $scan = new ScanFile(__FILE__);
+    $scan = new ScanFile(new \SplFileInfo(__DIR__ . '/AppServiceProvider.php'));
+    
+    // Scan
+    $scan = new Scan('Illuminate\Support\Arr');
+    $scan = new Scan(['Illuminate\Support\Arr']);
+    $scan = new Scan(new \ReflectionClass('Illuminate\Support\Arr'));
+}
+```
+
+### Annotation method
+
+```php
+use Annotation\Scannable\Attributes\Scan;
+use Annotation\Scannable\Attributes\ScanFile;
+use Annotation\Scannable\Attributes\ScanNamespace;
+use Annotation\Scannable\Attributes\ScanPath;
+use Annotation\Scannable\Attributes\ScanPackageNamespace;
 use Rfc\Scannable\Contracts\Scannable;
 
 #[ScanPackageNamespace(['GuzzleHttp'])]
@@ -47,8 +82,8 @@ class AppServiceProvider extends ServiceProvider implements Scannable
 ```
 
 ```php
-use Rfc\Scannable\ScanNamespace;
-use Rfc\Scannable\ScanPackageNamespace;
+use Annotation\Scannable\Attributes\ScanNamespace;
+use Annotation\Scannable\Attributes\ScanPackageNamespace;
 use Annotation\Scannable\Contracts\Scanner;
 use Annotation\Scannable\Facades\Scan;
 
