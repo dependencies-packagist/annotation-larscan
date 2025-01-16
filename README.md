@@ -49,10 +49,10 @@ class AppServiceProvider extends ServiceProvider implements Scannable
 ```php
 use Rfc\Scannable\ScanNamespace;
 use Rfc\Scannable\ScanPackageNamespace;
-use Annotation\Scannable\Contracts\Scanned;
+use Annotation\Scannable\Contracts\Scanner;
 use Annotation\Scannable\Facades\Scan;
 
-public function scan(Scanned $scan): void
+public function scan(Scanner $scan): void
 {
     $namespace = $scan->using(ScanPackageNamespace::class, function (ScanPackageNamespace $scanNamespace) {
         return $scanNamespace->getReflectionClass();

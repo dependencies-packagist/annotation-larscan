@@ -2,13 +2,13 @@
 
 namespace Annotation\Scannable;
 
-use Annotation\Scannable\Contracts\Scanned;
+use Annotation\Scannable\Contracts\Scanner;
 use BadMethodCallException;
 use Closure;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
 
-class Manager implements Scanned
+class Manager implements Scanner
 {
     use Macroable {
         __call as macroCall;

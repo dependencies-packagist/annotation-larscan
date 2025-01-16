@@ -2,7 +2,7 @@
 
 namespace Annotation\Scannable;
 
-use Annotation\Scannable\Contracts\Scanned;
+use Annotation\Scannable\Contracts\Scanner;
 use Annotation\Scannable\Facades\Scan;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
@@ -19,7 +19,7 @@ class ScannableServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(Scanned::class, Manager::class);
+        $this->app->singleton(Scanner::class, Manager::class);
     }
 
     /**

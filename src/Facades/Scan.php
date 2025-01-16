@@ -2,7 +2,7 @@
 
 namespace Annotation\Scannable\Facades;
 
-use Annotation\Scannable\Contracts\Scanned;
+use Annotation\Scannable\Contracts\Scanner;
 use Annotation\Scannable\Manager;
 use Closure;
 use Illuminate\Support\Collection;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static void scanning(string $abstract, mixed ...$payload)
  * @method static Collection using(string $abstract, Closure $callback)
  *
- * @see Scanned
+ * @see Scanner
  * @see Manager
  */
 class Scan extends Facade
@@ -24,7 +24,7 @@ class Scan extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return Scanned::class;
+        return Scanner::class;
     }
 
 }
