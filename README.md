@@ -53,6 +53,8 @@ public function scan(): void
 
 ### Annotation method
 
+> Only supports Laravel framework
+
 ```php
 use Annotation\Scannable\Attributes\Scan;
 use Annotation\Scannable\Attributes\ScanFile;
