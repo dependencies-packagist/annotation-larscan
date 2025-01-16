@@ -19,12 +19,12 @@ composer require annotation/larscan
 ## Usage
 
 ```php
-use Annotation\Scannable\Annotations\Scan;
-use Annotation\Scannable\Annotations\ScanFile;
-use Annotation\Scannable\Annotations\ScanNamespace;
-use Annotation\Scannable\Annotations\ScanPath;
-use Annotation\Scannable\Annotations\ScanPackageNamespace;
-use Annotation\Scannable\Contracts\Scannable;
+use Rfc\Scannable\Scan;
+use Rfc\Scannable\ScanFile;
+use Rfc\Scannable\ScanNamespace;
+use Rfc\Scannable\ScanPath;
+use Rfc\Scannable\ScanPackageNamespace;
+use Rfc\Scannable\Contracts\Scannable;
 
 #[ScanPackageNamespace(['GuzzleHttp'])]
 
@@ -47,8 +47,8 @@ class AppServiceProvider extends ServiceProvider implements Scannable
 ```
 
 ```php
-use Annotation\Scannable\Annotations\ScanNamespace;
-use Annotation\Scannable\Annotations\ScanPackageNamespace;
+use Rfc\Scannable\ScanNamespace;
+use Rfc\Scannable\ScanPackageNamespace;
 use Annotation\Scannable\Contracts\Scanned;
 use Annotation\Scannable\Facades\Scan;
 

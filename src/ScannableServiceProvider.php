@@ -2,13 +2,13 @@
 
 namespace Annotation\Scannable;
 
-use Annotation\Scannable\Contracts\Scannable;
 use Annotation\Scannable\Contracts\Scanned;
 use Annotation\Scannable\Facades\Scan;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use ReflectionAttribute;
 use ReflectionClass;
+use Rfc\Scannable\Contracts\Scannable;
 
 class ScannableServiceProvider extends ServiceProvider
 {
