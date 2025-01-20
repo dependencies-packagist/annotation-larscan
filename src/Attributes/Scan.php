@@ -35,7 +35,7 @@ class Scan implements Scannable
     public function getParentsClass(?string $name = null, int $flags = 0): array
     {
         return array_map(function (ReflectionClass $class) use ($name, $flags) {
-            return (new ReflectionParentClass($class->getName()))->getParentsClass($name, $flags);
+            return (new ReflectionParentClass($class->getName()))->getParentClasses($name, $flags);
         }, $this->getReflectionClass());
     }
 
